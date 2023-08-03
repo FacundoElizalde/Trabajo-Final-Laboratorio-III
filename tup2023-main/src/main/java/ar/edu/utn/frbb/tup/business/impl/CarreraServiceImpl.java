@@ -38,7 +38,7 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public void eliminarCarrera(String codigo) {
-        carreraDao.eliminarCarrera(codigo);
+    public void deleteCarrera(String codigo) {
+        carreraDao.deleteCarrera(codigo);
     }
 }

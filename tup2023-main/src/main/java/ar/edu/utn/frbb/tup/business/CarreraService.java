@@ -13,6 +13,6 @@ public interface CarreraService {
 
     List<Carrera> obtenerTodasLasCarreras();
 
-    void eliminarCarrera(String codigo);
+    void deleteCarrera(String codigo);
 }
 

@@ -29,7 +29,7 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
     }
 
     @Override
-    public void eliminarCarrera(String codigo) {
+    public void deleteCarrera(String codigo) {
         carreras.remove(codigo);
     }
 }
