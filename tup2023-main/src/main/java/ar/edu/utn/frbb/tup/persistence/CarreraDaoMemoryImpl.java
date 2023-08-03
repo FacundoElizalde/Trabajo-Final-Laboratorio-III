@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class CarreraDaoMemoryImpl implements CarreraDao {
 
-    // Simulación de una base de datos o almacenamiento en memoria
     private static Map<String, Carrera> carreras = new HashMap<>();
 
     @Override
@@ -20,8 +19,8 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
     }
 
     @Override
-    public Carrera obtenerCarreraPorNombre(String nombre) {
-        return carreras.get(nombre);
+    public Carrera obtenerCarreraPorCodigo(String codigo) {
+        return carreras.get(codigo);
     }
 
     @Override
@@ -30,8 +29,8 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
     }
 
     @Override
-    public void eliminarCarrera(String nombre) {
-        carreras.remove(nombre);
+    public void eliminarCarrera(String codigo) {
+        carreras.remove(codigo);
     }
 }
 
