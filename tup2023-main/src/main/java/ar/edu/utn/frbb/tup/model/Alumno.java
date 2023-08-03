@@ -3,7 +3,6 @@ package ar.edu.utn.frbb.tup.model;
 import ar.edu.utn.frbb.tup.model.exception.AsignaturaInexistenteException;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,6 @@ public class Alumno {
         this.dni = dni;
 
         asignaturas = new ArrayList<>();
-
     }
 
     public void setNombre(String nombre) {

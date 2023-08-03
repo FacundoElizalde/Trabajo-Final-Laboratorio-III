@@ -1,5 +1,7 @@
 package ar.edu.utn.frbb.tup.model.dto;
 
+import ar.edu.utn.frbb.tup.model.Asignatura;
+
 public class AsignaturaDto {
 
     private String nombreMateria;

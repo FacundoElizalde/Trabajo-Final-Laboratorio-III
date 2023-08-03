@@ -2,7 +2,6 @@ package ar.edu.utn.frbb.tup.model;
 import java.util.List;
 
 public class Carrera {
-    private Long id;
     private String nombre;
     private String codigo;
     private int departamento;
@@ -15,15 +14,6 @@ public class Carrera {
         this.codigo = codigo;
         this.departamento = departamento;
         this.cantidadCuatrimestres = cantidadCuatrimestres;
-    }
-
-    // Getters y Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNombre() {
