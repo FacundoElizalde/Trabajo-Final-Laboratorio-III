@@ -38,5 +38,4 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
     public Alumno loadAlumno(Long dni) {
         return null;
     }
-
 }
