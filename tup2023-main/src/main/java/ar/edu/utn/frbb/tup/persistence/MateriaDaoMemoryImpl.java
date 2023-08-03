@@ -28,6 +28,6 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
                 return m;
             }
         }
-        throw new MateriaNotFoundException("No se encontró la materia con id " + idMateria);
+        throw new MateriaNotFoundException("No se encontró la materia con el id " + idMateria);
     }
 }
