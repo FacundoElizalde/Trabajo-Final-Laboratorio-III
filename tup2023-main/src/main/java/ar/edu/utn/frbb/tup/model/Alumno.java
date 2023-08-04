@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Alumno {
     private long id;
-
     private String nombre;
     private String apellido;
     private long dni;
