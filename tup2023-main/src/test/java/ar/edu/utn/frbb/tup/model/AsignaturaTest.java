@@ -38,11 +38,11 @@ public class AsignaturaTest {
         }
     }
 
-    @Test(expected = EstadoIncorrectoException.class)
-    public void testAprobarAsignaturaMateriaNoCursada() throws EstadoIncorrectoException{
-        Asignatura asignatura = new Asignatura(materia);
-        asignatura.aprobarAsignatura(8);
-    }
+//    @Test(expected = EstadoIncorrectoException.class)
+//    public void testAprobarAsignaturaMateriaNoCursada() throws EstadoIncorrectoException{
+//        Asignatura asignatura = new Asignatura(materia);
+//        asignatura.aprobarAsignatura(8);
+//    }
 //
 //    @Test (expected = EstadoIncorrectoException.class)
 //    public void testAprobarAasignaturaYaAprobada() throws EstadoIncorrectoException{

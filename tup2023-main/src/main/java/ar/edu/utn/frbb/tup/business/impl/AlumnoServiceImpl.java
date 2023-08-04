@@ -12,10 +12,11 @@ import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDaoMemoryImpl;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
-@Component
+@Service
 public class AlumnoServiceImpl implements AlumnoService {
 
     private static final AlumnoDao alumnoDao = new AlumnoDaoMemoryImpl();
