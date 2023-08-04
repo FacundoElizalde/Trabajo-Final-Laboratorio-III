@@ -23,6 +23,5 @@ public class AlumnoController {
     public Alumno buscarAlumno(@RequestParam String apellido) {
 
        return alumnoService.buscarAlumno(apellido);
-
     }
 }
