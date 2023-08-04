@@ -8,5 +8,7 @@ import ar.edu.utn.frbb.tup.model.Alumno;
 
         Alumno loadAlumno(Long dni);
 
+        Alumno deleteAlumno(Long dni);
+
  }
 

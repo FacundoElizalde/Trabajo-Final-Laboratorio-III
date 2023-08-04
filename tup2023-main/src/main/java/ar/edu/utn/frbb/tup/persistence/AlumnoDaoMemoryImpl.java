@@ -38,4 +38,9 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
     public Alumno loadAlumno(Long dni) {
         return null;
     }
+
+    @Override
+    public Alumno deleteAlumno (Long dni){ repositorioAlumnos.remove(dni);
+        return null;
+    }
 }

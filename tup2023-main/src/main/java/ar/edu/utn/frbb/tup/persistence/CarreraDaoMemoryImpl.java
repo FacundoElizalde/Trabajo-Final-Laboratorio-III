@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class CarreraDaoMemoryImpl implements CarreraDao {
 
     private static Map<String, Carrera> carreras = new HashMap<>();

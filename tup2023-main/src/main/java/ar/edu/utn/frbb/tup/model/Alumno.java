@@ -102,7 +102,6 @@ public class Alumno {
         }
 
     }
-
     public long getId() {
         return id;
     }
