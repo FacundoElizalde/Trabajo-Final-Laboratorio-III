@@ -1,7 +1,5 @@
 package ar.edu.utn.frbb.tup.model.dto;
 
-import ar.edu.utn.frbb.tup.model.Materia;
-
 import java.util.List;
 
 public class MateriaDto {

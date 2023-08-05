@@ -1,7 +1,5 @@
 package ar.edu.utn.frbb.tup.model.dto;
 
-import ar.edu.utn.frbb.tup.model.Alumno;
-
 public class CarreraDto {
 
     private String nombre;
