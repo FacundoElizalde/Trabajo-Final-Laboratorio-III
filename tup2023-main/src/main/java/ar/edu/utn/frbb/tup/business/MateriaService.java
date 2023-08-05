@@ -9,7 +9,13 @@ import java.util.List;
 public interface MateriaService {
     Materia crearMateria(MateriaDto inputData) throws IllegalArgumentException;
 
-    List<Materia> getAllMaterias();
-
     Materia getMateriaById(int idMateria) throws MateriaNotFoundException;
+
+    List<Materia> getMateriasPorNombre(String nombre);
+
+    List<Materia> getMateriasOrdenadas(String order);
+
+    Materia modificarMateria(int idMateria, Materia materia) throws MateriaNotFoundException;
+
+    Materia deleteMateria(int idMateria) throws MateriaNotFoundException;
 }

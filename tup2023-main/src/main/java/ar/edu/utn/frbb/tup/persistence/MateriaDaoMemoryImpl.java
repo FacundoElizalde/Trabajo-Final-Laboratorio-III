@@ -1,33 +1,58 @@
 package ar.edu.utn.frbb.tup.persistence;
 
 import ar.edu.utn.frbb.tup.model.Materia;
-import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.stream.Collectors;
 
-@Service
 public class MateriaDaoMemoryImpl implements MateriaDao {
+    private final Map<Integer, Materia> materiasMap;
+    private int nextId;
 
-    private static final Map<Integer, Materia> repositorioMateria = new HashMap<>();
+    public MateriaDaoMemoryImpl() {
+        this.materiasMap = new HashMap<>();
+        this.nextId = 1;
+    }
+
     @Override
     public Materia save(Materia materia) {
-        Random random = new Random();
-        materia.setMateriaId(random.nextInt());
-        repositorioMateria.put(materia.getMateriaId(), materia);
+        if (materia.getMateriaId() == 0) {
+            materia.setMateriaId(nextId++);
+        }
+        materiasMap.put(materia.getMateriaId(), materia);
         return materia;
     }
 
     @Override
-    public Materia findById(int idMateria) throws MateriaNotFoundException {
-        for (Materia m:
-                repositorioMateria.values()) {
-            if (idMateria == m.getMateriaId()) {
-                return m;
-            }
+    public Materia findById(int idMateria) {
+        return materiasMap.get(idMateria);
+    }
+
+    @Override
+    public List<Materia> getMateriasPorNombre(String nombre) {
+        return materiasMap.values().stream()
+                .filter(m -> m.getNombre().equalsIgnoreCase(nombre))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Materia> getMateriasOrdenadas(String order) {
+        List<Materia> materias = new ArrayList<>(materiasMap.values());
+        if ("asc".equalsIgnoreCase(order)) {
+            materias.sort(Comparator.comparing(Materia::getNombre));
+        } else if ("desc".equalsIgnoreCase(order)) {
+            materias.sort(Comparator.comparing(Materia::getNombre).reversed());
         }
-        throw new MateriaNotFoundException("No se encontró la materia con el id " + idMateria);
+        return materias;
+    }
+
+    @Override
+    public void delete(Materia materia) {
+        materiasMap.remove(materia.getMateriaId());
     }
 }
