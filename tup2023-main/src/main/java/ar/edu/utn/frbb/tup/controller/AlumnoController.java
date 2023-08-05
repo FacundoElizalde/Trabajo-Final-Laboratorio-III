@@ -47,7 +47,7 @@ public class AlumnoController {
         }
     }
 
-    @PostMapping("/alumno/{idAlumno}/asignatura/{idAsignatura}")
+    @PostMapping("/{materiaId}/aprobar")
     public ResponseEntity<String> aprobarAsignatura(
             @PathVariable int materiaId,
             @RequestParam int nota,
