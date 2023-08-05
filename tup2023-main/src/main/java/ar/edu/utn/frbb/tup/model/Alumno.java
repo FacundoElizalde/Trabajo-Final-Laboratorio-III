@@ -108,4 +108,8 @@ public class Alumno {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Asignatura[] getAsignaturas() {
+        return new Asignatura[0];
+    }
 }

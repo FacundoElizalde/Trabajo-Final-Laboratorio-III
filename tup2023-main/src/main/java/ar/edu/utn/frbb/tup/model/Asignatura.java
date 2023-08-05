@@ -55,4 +55,7 @@ public class Asignatura {
         }
     }
 
+    public int getId() {
+        return 0;
+    }
 }

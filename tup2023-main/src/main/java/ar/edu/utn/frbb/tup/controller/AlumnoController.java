@@ -3,15 +3,13 @@ package ar.edu.utn.frbb.tup.controller;
 import ar.edu.utn.frbb.tup.business.AlumnoService;
 import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
-import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
-import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/alumno")
 public class AlumnoController {
 
     private final AlumnoService alumnoService;
@@ -23,42 +21,52 @@ public class AlumnoController {
 
     @PostMapping
     public ResponseEntity<Alumno> crearAlumno(@RequestBody AlumnoDto alumnoDto) {
-        Alumno alumno = alumnoService.crearAlumno(alumnoDto);
-        return new ResponseEntity<>(alumno, HttpStatus.CREATED);
+        Alumno alumno = convertirDtoAAlumno(alumnoDto);
+        Alumno nuevoAlumno = alumnoService.crearAlumno(alumnoDto);
+        return new ResponseEntity<>(nuevoAlumno, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{dni}")
-    public ResponseEntity<Alumno> buscarAlumnoPorDni(@PathVariable long dni) {
-        Alumno alumno = alumnoService.buscarAlumno(String.valueOf(dni));
-        if (alumno != null) {
-            return new ResponseEntity<>(alumno, HttpStatus.OK);
+    @PutMapping("/{idAlumno}")
+    public ResponseEntity<Alumno> modificarAlumno(@PathVariable long idAlumno, @RequestBody AlumnoDto alumnoDto) {
+        Alumno alumno = convertirDtoAAlumno(alumnoDto);
+        Alumno alumnoModificado = alumnoService.modificarAlumno(idAlumno, alumno);
+        if (alumnoModificado != null) {
+            return new ResponseEntity<>(alumnoModificado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{dni}")
-    public ResponseEntity<Alumno> deleteAlumno(@PathVariable long dni) {
-        Alumno alumno = alumnoService.deleteAlumno(dni);
-        if (alumno != null) {
-            return new ResponseEntity<>(alumno, HttpStatus.OK);
+    @DeleteMapping("/{idAlumno}")
+    public ResponseEntity<Alumno> deleteAlumno(@PathVariable long idAlumno) {
+        Alumno alumnoEliminado = alumnoService.deleteAlumno(idAlumno);
+        if (alumnoEliminado != null) {
+            return new ResponseEntity<>(alumnoEliminado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PostMapping("/{materiaId}/aprobar")
-    public ResponseEntity<String> aprobarAsignatura(
-            @PathVariable int materiaId,
-            @RequestParam int nota,
-            @RequestParam long dni
+    @PutMapping("/{idAlumno}/asignatura/{idAsignatura}")
+    public ResponseEntity<Alumno> modificarEstadoAsignatura(
+            @PathVariable long idAlumno,
+            @PathVariable int idAsignatura,
+            @RequestParam String estadoAsignatura
     ) {
-        try {
-            alumnoService.aprobarAsignatura(materiaId, nota, dni);
-            return new ResponseEntity<>("Asignatura aprobada correctamente", HttpStatus.OK);
-        } catch (EstadoIncorrectoException |
-                 CorrelatividadesNoAprobadasException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        Alumno alumno = alumnoService.modificarEstadoAsignatura(idAlumno, idAsignatura, estadoAsignatura);
+        if (alumno != null) {
+            return new ResponseEntity<>(alumno, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private Alumno convertirDtoAAlumno(AlumnoDto alumnoDto) {
+        Alumno alumno = new Alumno();
+        alumno.setNombre(alumnoDto.getNombre());
+        alumno.setApellido(alumnoDto.getApellido());
+        alumno.setDni(alumnoDto.getDni());
+        return alumno;
     }
 }
+

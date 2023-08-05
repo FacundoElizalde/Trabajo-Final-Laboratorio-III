@@ -10,7 +10,7 @@ import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
-import ar.edu.utn.frbb.tup.persistence.AlumnoDaoMemoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -18,14 +18,19 @@ import java.util.Random;
 @Service
 public class AlumnoServiceImpl implements AlumnoService {
 
-    private static final AlumnoDao alumnoDao = new AlumnoDaoMemoryImpl();
-    private static final AsignaturaService asignaturaService = new AsignaturaServiceImpl();
+    private final AlumnoDao alumnoDao;
+    private final AsignaturaService asignaturaService;
+
+    @Autowired
+    public AlumnoServiceImpl(AlumnoDao alumnoDao, AsignaturaService asignaturaService) {
+        this.alumnoDao = alumnoDao;
+        this.asignaturaService = asignaturaService;
+    }
 
     @Override
     public void aprobarAsignatura(int materiaId, int nota, long dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException {
         Asignatura a = asignaturaService.getAsignatura(materiaId, dni);
-        for (Materia m:
-             a.getMateria().getCorrelatividades()) {
+        for (Materia m : a.getMateria().getCorrelatividades()) {
             Asignatura correlativa = asignaturaService.getAsignatura(m.getMateriaId(), dni);
             if (!EstadoAsignatura.APROBADA.equals(correlativa.getEstado())) {
                 throw new CorrelatividadesNoAprobadasException("La materia " + m.getNombre() + " debe estar aprobada para aprobar " + a.getNombreAsignatura());
@@ -56,5 +61,35 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public Alumno deleteAlumno(Long dni) {return alumnoDao.deleteAlumno(dni);}
+    public Alumno deleteAlumno(Long dni) {
+        return alumnoDao.deleteAlumno(dni);
+    }
+
+    @Override
+    public Alumno modificarAlumno(long idAlumno, Alumno alumno) {
+        Alumno alumnoExistente = alumnoDao.loadAlumno(idAlumno);
+        if (alumnoExistente != null) {
+            alumnoExistente.setNombre(alumno.getNombre());
+            alumnoExistente.setApellido(alumno.getApellido());
+            alumnoExistente.setDni(alumno.getDni());
+            alumnoDao.saveAlumno(alumnoExistente);
+        }
+        return alumnoExistente;
+    }
+
+    @Override
+    public Alumno modificarEstadoAsignatura(long idAlumno, int idAsignatura, String estadoAsignatura) {
+        Alumno alumno = alumnoDao.loadAlumno(idAlumno);
+        if (alumno != null) {
+            for (Asignatura asignatura : alumno.getAsignaturas()) {
+                if (asignatura.getId() == idAsignatura) {
+                    asignatura.setEstado(EstadoAsignatura.valueOf(estadoAsignatura.toUpperCase()));
+                    alumnoDao.saveAlumno(alumno);
+                    return alumno;
+                }
+            }
+        }
+        return null;
+    }
 }
+
