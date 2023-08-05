@@ -34,7 +34,7 @@ public class MateriaController {
     }
 
     @PutMapping("/{idMateria}")
-    public ResponseEntity<Materia> modificarMateria(@PathVariable int idMateria, @RequestBody MateriaDto materiaDto) {
+    public ResponseEntity<Materia> modificarMateria(@PathVariable int idMateria, @RequestBody MateriaDto materiaDto) throws MateriaNotFoundException {
         Materia materia = convertirDtoAMateria(materiaDto);
         Materia materiaModificada = materiaService.modificarMateria(idMateria, materia);
         if (materiaModificada != null) {
@@ -45,7 +45,7 @@ public class MateriaController {
     }
 
     @DeleteMapping("/{idMateria}")
-    public ResponseEntity<Materia> eliminarMateria(@PathVariable int idMateria) {
+    public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) throws MateriaNotFoundException {
         Materia materiaEliminada = materiaService.deleteMateria(idMateria);
         if (materiaEliminada != null) {
             return new ResponseEntity<>(materiaEliminada, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class MateriaController {
             List<Materia> materiasPorNombre = materiaService.getMateriasPorNombre(nombre);
             return new ResponseEntity<>(materiasPorNombre, HttpStatus.OK);
         } else {
-            List<Materia> todasLasMaterias = materiaService.getAllMaterias();
+            List<Materia> todasLasMaterias = materiaService.getMateriasOrdenadas(nombre);
             return new ResponseEntity<>(todasLasMaterias, HttpStatus.OK);
         }
     }

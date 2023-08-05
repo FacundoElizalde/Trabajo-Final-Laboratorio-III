@@ -7,7 +7,6 @@ import ar.edu.utn.frbb.tup.business.CarreraService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CarreraServiceImpl implements CarreraService {

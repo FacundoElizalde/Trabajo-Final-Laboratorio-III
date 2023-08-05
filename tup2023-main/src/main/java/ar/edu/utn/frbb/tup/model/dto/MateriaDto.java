@@ -1,7 +1,5 @@
 package ar.edu.utn.frbb.tup.model.dto;
 
-import java.util.List;
-
 public class MateriaDto {
     private String nombre;
     private int anio;

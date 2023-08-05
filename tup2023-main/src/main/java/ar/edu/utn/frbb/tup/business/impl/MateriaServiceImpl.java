@@ -5,9 +5,11 @@ import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MateriaServiceImpl implements MateriaService {
 
     private final MateriaDao materiaDao;
