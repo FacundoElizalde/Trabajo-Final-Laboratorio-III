@@ -34,6 +34,51 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>ar-drone</groupId>
+          <artifactId>ar-drone</artifactId>
+          <version>0.1.9a</version>
+      </dependency>
+    <dependency>
+      <groupId>noir-exception</groupId>
+      <artifactId>noir-exception</artifactId>
+      <version>0.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
+    <dependency>
+      <groupId>ar-drone</groupId>
+      <artifactId>ar-drone</artifactId>
+      <version>0.1.9a</version>
+    </dependency>
   </dependencies>
 
   <build>

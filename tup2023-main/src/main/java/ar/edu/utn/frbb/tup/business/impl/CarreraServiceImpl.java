@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CarreraServiceImpl implements CarreraService {
 
-    private CarreraDao carreraDao;
+    private final CarreraDao carreraDao;
 
     public CarreraServiceImpl(CarreraDao carreraDao) {
         this.carreraDao = carreraDao;

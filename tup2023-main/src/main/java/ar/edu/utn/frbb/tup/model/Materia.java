@@ -45,13 +45,11 @@ public class Materia {
         this.anio = anio;
         this.cuatrimestre = cuatrimestre;
         this.nombre = nombre;
-
         correlatividades = new ArrayList<>();
     }
 
     public void agregarCorrelatividad(Materia m){
         this.correlatividades.add(m);
-
     }
 
     public List<Materia> getCorrelatividades(){
@@ -75,7 +73,8 @@ public class Materia {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Materia materia = (Materia) o;
-        return materiaId == materia.materiaId && anio == materia.anio && cuatrimestre == materia.cuatrimestre && Objects.equals(nombre, materia.nombre) &&  Objects.equals(correlatividades, materia.correlatividades);
+        return materiaId == materia.materiaId && anio == materia.anio && cuatrimestre == materia.cuatrimestre
+                && Objects.equals(nombre, materia.nombre) &&  Objects.equals(correlatividades, materia.correlatividades);
     }
 
     @Override
