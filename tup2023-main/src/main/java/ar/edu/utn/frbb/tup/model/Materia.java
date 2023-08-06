@@ -81,4 +81,7 @@ public class Materia {
 
     public void setNombre(String nombre) {
     }
+
+    public void setId(int idMateria) {
+    }
 }

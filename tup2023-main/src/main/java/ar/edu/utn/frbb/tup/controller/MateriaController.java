@@ -44,16 +44,6 @@ public class MateriaController {
         }
     }
 
-    @DeleteMapping("/{idMateria}")
-    public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) throws MateriaNotFoundException {
-        Materia materiaEliminada = materiaService.deleteMateria(idMateria);
-        if (materiaEliminada != null) {
-            return new ResponseEntity<>(materiaEliminada, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping
     public ResponseEntity<List<Materia>> obtenerMateriasPorNombre(@RequestParam(required = false) String nombre) {
         if (nombre != null && !nombre.isEmpty()) {
@@ -69,6 +59,16 @@ public class MateriaController {
     public ResponseEntity<List<Materia>> obtenerMateriasOrdenadas(@RequestParam(required = false) String order) {
         List<Materia> materiasOrdenadas = materiaService.getMateriasOrdenadas(order);
         return new ResponseEntity<>(materiasOrdenadas, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idMateria}")
+    public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) throws MateriaNotFoundException {
+        Materia materiaEliminada = materiaService.deleteMateria(idMateria);
+        if (materiaEliminada != null) {
+            return new ResponseEntity<>(materiaEliminada, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     private Materia convertirDtoAMateria(MateriaDto materiaDto) {
