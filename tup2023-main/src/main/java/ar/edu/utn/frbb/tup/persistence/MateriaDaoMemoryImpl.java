@@ -46,17 +46,18 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
     @Override
     public List<Materia> getMateriasPorNombre(String nombre) {
         return materiasMap.values().stream()
-                .filter(m -> m.getNombre().equalsIgnoreCase(nombre))
+                .filter(m -> nombre != null && nombre.equalsIgnoreCase(m.getNombre()))
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public List<Materia> getMateriasOrdenadas(String order) {
         List<Materia> materias = new ArrayList<>(materiasMap.values());
         if ("asc".equalsIgnoreCase(order)) {
-            materias.sort(Comparator.comparing(Materia::getNombre));
+            materias.sort(Comparator.comparing(Materia::getNombre, Comparator.nullsLast(String::compareTo)));
         } else if ("desc".equalsIgnoreCase(order)) {
-            materias.sort(Comparator.comparing(Materia::getNombre).reversed());
+            materias.sort(Comparator.comparing(Materia::getNombre, Comparator.nullsLast(String::compareTo)).reversed());
         }
         return materias;
     }

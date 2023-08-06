@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MateriaDaoTest {
 
     private MateriaDao materiaDao;
@@ -22,9 +24,9 @@ public class MateriaDaoTest {
         Materia materiaGuardada = materiaDao.save(materia);
 
         Assertions.assertNotNull(materiaGuardada);
-        Assertions.assertEquals("Programación I", materiaGuardada.getNombre());
-        Assertions.assertEquals(1, materiaGuardada.getAnio());
-        Assertions.assertEquals(1, materiaGuardada.getCuatrimestre());
+        assertEquals("Programación I", materiaGuardada.getNombre());
+        assertEquals(1, materiaGuardada.getAnio());
+        assertEquals(1, materiaGuardada.getCuatrimestre());
     }
 
     @Test
@@ -38,45 +40,68 @@ public class MateriaDaoTest {
         Materia materiaEncontrada = materiaDao.findById(1);
 
         Assertions.assertNotNull(materiaEncontrada);
-        Assertions.assertEquals("Programación I", materiaEncontrada.getNombre());
+        assertEquals("Programación I", materiaEncontrada.getNombre());
     }
 
     @Test
     public void testGetMateriasPorNombre() {
-        Materia materia1 = new Materia("Programación I", 1, 1);
-        Materia materia2 = new Materia("Matemática I", 1, 2);
-        Materia materia3 = new Materia("Programación II", 2, 1);
+        Materia materia1 = new Materia();
+        materia1.setMateriaId(1);
+        materia1.setNombre("Matemáticas");
+
+        Materia materia2 = new Materia();
+        materia2.setMateriaId(2);
+        materia2.setNombre("Historia");
+
+        Materia materia3 = new Materia();
+        materia3.setMateriaId(3);
+        materia3.setNombre("Informática");
+
+        // Guardar las materias
+        materiaDao.save(materia1);
+        materiaDao.save(materia2);
+        materiaDao.save(materia3);
+
+        List<Materia> materiasPorNombre = materiaDao.getMateriasPorNombre("Matemáticas");
+        Assertions.assertNotNull(materiasPorNombre);
+        assertEquals(1, materiasPorNombre.size());
+        assertEquals("Matemáticas", materiasPorNombre.get(0).getNombre());
+
+        // Prueba cuando no se encuentra ninguna materia con el nombre especificado
+        List<Materia> materiasPorNombreNoEncontradas = materiaDao.getMateriasPorNombre("Inexistente");
+        Assertions.assertNotNull(materiasPorNombreNoEncontradas);
+        assertEquals(0, materiasPorNombreNoEncontradas.size());
+    }
+
+    @Test
+    public void testGetMateriasOrdenadas() {
+        Materia materia1 = new Materia();
+        materia1.setMateriaId(1);
+        materia1.setNombre("Matemáticas");
+
+        Materia materia2 = new Materia();
+        materia2.setMateriaId(2);
+        materia2.setNombre("Historia");
+
+        Materia materia3 = new Materia();
+        materia3.setMateriaId(3);
+        materia3.setNombre("Informática");
 
         materiaDao.save(materia1);
         materiaDao.save(materia2);
         materiaDao.save(materia3);
 
-        List<Materia> materiasPorNombre = materiaDao.getMateriasPorNombre("Programación");
+        List<Materia> materiasAscendentes = materiaDao.getMateriasOrdenadas("asc");
+        assertEquals(3, materiasAscendentes.size());
+        assertEquals("Historia", materiasAscendentes.get(0).getNombre());
+        assertEquals("Informática", materiasAscendentes.get(1).getNombre());
+        assertEquals("Matemáticas", materiasAscendentes.get(2).getNombre());
 
-        Assertions.assertEquals(2, materiasPorNombre.size());
-        Assertions.assertTrue(materiasPorNombre.contains(materia1));
-        Assertions.assertTrue(materiasPorNombre.contains(materia3));
-    }
-
-    @Test
-    public void testGetMateriasOrdenadas() {
-        Materia materia1 = new Materia("Programación I", 1, 1);
-        Materia materia2 = new Materia("Matemática I", 1, 2);
-
-        materiaDao.save(materia1);
-        materiaDao.save(materia2);
-
-        List<Materia> materiasAscendente = materiaDao.getMateriasOrdenadas("nombre_asc");
-        List<Materia> materiasDescendente = materiaDao.getMateriasOrdenadas("nombre_desc");
-
-        Assertions.assertEquals(2, materiasAscendente.size());
-        Assertions.assertEquals(2, materiasDescendente.size());
-
-        Assertions.assertEquals("Matemática I", materiasAscendente.get(0).getNombre());
-        Assertions.assertEquals("Programación I", materiasAscendente.get(1).getNombre());
-
-        Assertions.assertEquals("Programación I", materiasDescendente.get(0).getNombre());
-        Assertions.assertEquals("Matemática I", materiasDescendente.get(1).getNombre());
+        List<Materia> materiasDescendentes = materiaDao.getMateriasOrdenadas("desc");
+        assertEquals(3, materiasDescendentes.size());
+        assertEquals("Matemáticas", materiasDescendentes.get(0).getNombre());
+        assertEquals("Informática", materiasDescendentes.get(1).getNombre());
+        assertEquals("Historia", materiasDescendentes.get(2).getNombre());
     }
 
     @Test

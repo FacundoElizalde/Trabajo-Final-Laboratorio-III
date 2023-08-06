@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Materia {
-    private int materiaId;
+
     private String nombre;
+    private int materiaId;
     private int anio;
     private int cuatrimestre;
     private List<Materia> correlatividades;
@@ -16,9 +17,9 @@ public class Materia {
     }
 
     public Materia(String nombre, int anio, int cuatrimestre) {
+        this.nombre = nombre;
         this.anio = anio;
         this.cuatrimestre = cuatrimestre;
-        this.nombre = nombre;
     }
 
     public void agregarCorrelatividad(Materia m) {
@@ -80,8 +81,10 @@ public class Materia {
     }
 
     public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setId(int idMateria) {
+    public void setCorrelatividades(List<Materia> correlatividades) {
+        this.correlatividades = correlatividades;
     }
 }

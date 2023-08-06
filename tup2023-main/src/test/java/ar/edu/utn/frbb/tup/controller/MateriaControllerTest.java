@@ -63,7 +63,7 @@ public class MateriaControllerTest {
         materiaDto.setCuatrimestre(1);
 
         Materia materiaModificada = new Materia();
-        materiaModificada.setId(idMateria);
+        materiaModificada.setMateriaId(idMateria);
         materiaModificada.setNombre("Matemáticas");
         materiaModificada.setAnio(2);
         materiaModificada.setCuatrimestre(1);
@@ -92,7 +92,7 @@ public class MateriaControllerTest {
         int idMateria = 1;
 
         Materia materiaEliminada = new Materia();
-        materiaEliminada.setId(idMateria);
+        materiaEliminada.setMateriaId(idMateria);
         materiaEliminada.setNombre("Matemáticas");
         materiaEliminada.setAnio(2);
         materiaEliminada.setCuatrimestre(1);
