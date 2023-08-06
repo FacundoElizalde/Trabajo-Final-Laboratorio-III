@@ -3,6 +3,7 @@ package ar.edu.utn.frbb.tup.controller;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.dto.CarreraDto;
 import ar.edu.utn.frbb.tup.business.CarreraService;
+import ar.edu.utn.frbb.tup.persistence.exception.CarreraNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class CarreraController {
     }
 
     @DeleteMapping("/{idCarrera}")
-    public ResponseEntity<Void> deleteCarrera(@RequestParam int codigo) {
+    public ResponseEntity<Void> deleteCarrera(@RequestParam int codigo) throws CarreraNotFoundException {
         carreraService.deleteCarrera(codigo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

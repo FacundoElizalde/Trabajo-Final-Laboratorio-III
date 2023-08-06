@@ -4,6 +4,7 @@ import ar.edu.utn.frbb.tup.persistence.CarreraDao;
 import ar.edu.utn.frbb.tup.model.dto.CarreraDto;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.business.CarreraService;
+import ar.edu.utn.frbb.tup.persistence.exception.CarreraNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,8 +40,12 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public Carrera deleteCarrera(int codigo) {
+    public Carrera deleteCarrera(int codigo) throws CarreraNotFoundException {
+        Carrera carrera = carreraDao.obtenerCarreraPorCodigo(codigo);
+        if (carrera == null) {
+            throw new CarreraNotFoundException("Carrera no encontrada con código: " + codigo);
+        }
         carreraDao.deleteCarrera(codigo);
-        return null;
+        return carrera;
     }
 }

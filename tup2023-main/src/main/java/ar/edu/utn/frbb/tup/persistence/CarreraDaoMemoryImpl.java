@@ -11,26 +11,32 @@ import java.util.Map;
 @Service
 public class CarreraDaoMemoryImpl implements CarreraDao {
 
-    private static final Map<String, Carrera> carreras = new HashMap<>();
+    private static final Map<String, Carrera> carrerasPorNombre = new HashMap<>();
+    private static final Map<Integer, Carrera> carrerasPorCodigo = new HashMap<>();
+
 
     @Override
     public Carrera save(Carrera carrera) {
-        carreras.put(carrera.getNombre(), carrera);
+        carrerasPorNombre.put(carrera.getNombre(), carrera);
         return carrera;
     }
 
     @Override
     public Carrera obtenerCarreraPorCodigo(int codigo) {
-        return carreras.get(codigo);
+        return carrerasPorCodigo.get(codigo);
     }
 
     @Override
     public List<Carrera> obtenerTodasLasCarreras() {
-        return new ArrayList<>(carreras.values());
+        return new ArrayList<>(carrerasPorNombre.values());
     }
 
     @Override
     public void deleteCarrera(int codigo) {
-        carreras.remove(codigo);
+        Carrera carrera = carrerasPorCodigo.get(codigo);
+        if (carrera != null) {
+            carrerasPorCodigo.remove(codigo);
+            carrerasPorNombre.remove(carrera.getNombre());
+        }
     }
 }
