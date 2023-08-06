@@ -27,7 +27,7 @@ public class AlumnoController {
         return new ResponseEntity<>(nuevoAlumno, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{idAlumno}")
+    @PutMapping("/alumno/{idAlumno}")
     public ResponseEntity<Alumno> modificarAlumno(@PathVariable long idAlumno, @RequestBody AlumnoDto alumnoDto) {
         Alumno alumno = convertirDtoAAlumno(alumnoDto);
         Alumno alumnoModificado = alumnoService.modificarAlumno(idAlumno, alumno);
@@ -38,7 +38,7 @@ public class AlumnoController {
         }
     }
 
-    @DeleteMapping("/{idAlumno}")
+    @DeleteMapping("/alumno/{idAlumno}")
     public ResponseEntity<Alumno> deleteAlumno(@PathVariable long idAlumno) {
         Alumno alumnoEliminado = alumnoService.deleteAlumno(idAlumno);
         if (alumnoEliminado != null) {

@@ -43,6 +43,12 @@ public class CarreraController {
         return new ResponseEntity<>(carreraGuardada, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Carrera> modificarCarrera(@PathVariable int codigo, @RequestBody CarreraDto carreraDto) throws CarreraNotFoundException {
+        Carrera carreraModificada = carreraService.modificarCarrera(codigo, carreraDto);
+        return new ResponseEntity<>(carreraModificada, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{codigo}")
     public ResponseEntity<Void> deleteCarrera(@PathVariable int codigo) {
         try {

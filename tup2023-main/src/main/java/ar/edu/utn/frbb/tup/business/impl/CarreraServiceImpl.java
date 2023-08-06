@@ -1,5 +1,6 @@
 package ar.edu.utn.frbb.tup.business.impl;
 
+import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
 import ar.edu.utn.frbb.tup.model.dto.CarreraDto;
 import ar.edu.utn.frbb.tup.model.Carrera;
@@ -47,5 +48,19 @@ public class CarreraServiceImpl implements CarreraService {
         }
         carreraDao.deleteCarrera(codigo);
         return carrera;
+    }
+
+    @Override
+    public Carrera modificarCarrera(int codigo, CarreraDto carreraDto) throws CarreraNotFoundException {
+        Carrera carreraExistente = carreraDao.obtenerCarreraPorCodigo(codigo);
+        if (carreraExistente == null) {
+            throw new CarreraNotFoundException("Carrera no encontrada con código: " + codigo);
+        }
+
+        carreraExistente.setNombre(carreraDto.getNombre());
+        carreraExistente.setDepartamento(carreraDto.getDepartamento());
+        carreraExistente.setCantidadCuatrimestres(carreraDto.getCantidadCuatrimestres());
+
+        return carreraDao.save(carreraExistente);
     }
 }
