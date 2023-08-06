@@ -1,6 +1,7 @@
 package ar.edu.utn.frbb.tup.persistence;
 
 import ar.edu.utn.frbb.tup.model.Alumno;
+import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +29,9 @@ public class AlumnoDaoTest {
     }
 
     @Test
-    public void testFindAlumnoByApellido() {
-        Alumno alumno1 = new Alumno("Juan", "Perez", 111111111L);
-        Alumno alumno2 = new Alumno("Ana", "Lopez", 222222222L);
+    public void testFindAlumnoByApellido() throws DaoException {
+        Alumno alumno1 = new Alumno("Juan", "Perez", 44883011);
+        Alumno alumno2 = new Alumno("Ana", "Lopez", 45887012);
 
         alumnoDao.saveAlumno(alumno1);
         alumnoDao.saveAlumno(alumno2);
@@ -39,7 +40,7 @@ public class AlumnoDaoTest {
         Assertions.assertNotNull(alumnoEncontrado);
         Assertions.assertEquals("Ana", alumnoEncontrado.getNombre());
         Assertions.assertEquals("Lopez", alumnoEncontrado.getApellido());
-        Assertions.assertEquals(222222222L, alumnoEncontrado.getDni());
+        Assertions.assertEquals(45887012, alumnoEncontrado.getDni());
     }
 
     @Test

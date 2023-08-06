@@ -4,6 +4,7 @@ import ar.edu.utn.frbb.tup.business.impl.AlumnoServiceImpl;
 import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
+import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +41,7 @@ public class AlumnoServiceTest {
     }
 
     @Test
-    public void testBuscarAlumno() {
+    public void testBuscarAlumno() throws DaoException {
         String apellido = "Perez";
         Alumno alumnoEsperado = new Alumno("Juan", "Perez", 123456789L);
         when(alumnoDao.findAlumno(apellido)).thenReturn(alumnoEsperado);

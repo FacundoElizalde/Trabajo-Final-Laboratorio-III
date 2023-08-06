@@ -1,47 +1,40 @@
 package ar.edu.utn.frbb.tup.persistence;
 
 import ar.edu.utn.frbb.tup.model.Alumno;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
+import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
-@Service
 public class AlumnoDaoMemoryImpl implements AlumnoDao {
 
-    private static Map<Long, Alumno> repositorioAlumnos = new HashMap<>();
+    private static final Map<Long, Alumno> repositorioAlumnos = new HashMap<>();
 
     @Override
     public Alumno saveAlumno(Alumno alumno) {
         Random random = new Random();
         alumno.setId(random.nextLong());
-        return repositorioAlumnos.put(alumno.getDni(), alumno);
+        repositorioAlumnos.put(alumno.getDni(), alumno);
+        return alumno;
     }
 
     @Override
-    public Alumno findAlumno(String apellidoAlumno) {
-        for (Alumno a: repositorioAlumnos.values()) {
-            if (a.getApellido().equals(apellidoAlumno)){
+    public Alumno findAlumno(String apellidoAlumno) throws DaoException {
+        for (Alumno a : repositorioAlumnos.values()) {
+            if (a.getApellido().equals(apellidoAlumno)) {
                 return a;
             }
         }
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "No existen alumnos con esos datos."
-        );
+        throw new DaoException("No existen alumnos con ese apellido.");
     }
 
     @Override
     public Alumno loadAlumno(Long dni) {
-        return null;
+        return repositorioAlumnos.get(dni);
     }
 
     @Override
     public Alumno deleteAlumno(Long dni) {
-        repositorioAlumnos.remove(dni);
-        return null;
+        return repositorioAlumnos.remove(dni);
     }
 }
