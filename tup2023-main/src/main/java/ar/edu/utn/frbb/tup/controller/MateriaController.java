@@ -33,7 +33,7 @@ public class MateriaController {
         }
     }
 
-    @PutMapping("/{idMateria}")
+    @PutMapping("materia/{idMateria}")
     public ResponseEntity<Materia> modificarMateria(@PathVariable int idMateria, @RequestBody MateriaDto materiaDto) throws MateriaNotFoundException {
         Materia materia = convertirDtoAMateria(materiaDto);
         Materia materiaModificada = materiaService.modificarMateria(idMateria, materia);
@@ -44,7 +44,7 @@ public class MateriaController {
         }
     }
 
-    @DeleteMapping("/{idMateria}")
+    @DeleteMapping("materia/{idMateria}")
     public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) throws MateriaNotFoundException {
         Materia materiaEliminada = materiaService.deleteMateria(idMateria);
         if (materiaEliminada != null) {
@@ -65,7 +65,7 @@ public class MateriaController {
         }
     }
 
-    @GetMapping("/ordenar")
+    @GetMapping("materia/ordenar")
     public ResponseEntity<List<Materia>> obtenerMateriasOrdenadas(@RequestParam(required = false) String order) {
         List<Materia> materiasOrdenadas = materiaService.getMateriasOrdenadas(order);
         return new ResponseEntity<>(materiasOrdenadas, HttpStatus.OK);

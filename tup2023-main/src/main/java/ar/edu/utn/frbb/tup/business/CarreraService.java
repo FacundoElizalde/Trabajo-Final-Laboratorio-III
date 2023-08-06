@@ -9,10 +9,10 @@ public interface CarreraService {
 
     Carrera guardarCarrera(CarreraDto carreraDto);
 
-    Carrera obtenerCarreraPorCodigo(String codigo);
+    Carrera obtenerCarreraPorCodigo(int codigo);
 
     List<Carrera> obtenerTodasLasCarreras();
 
-    void deleteCarrera(String codigo);
+    void deleteCarrera(int codigo);
 }
 

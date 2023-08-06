@@ -16,7 +16,6 @@ import java.util.Random;
 @Service
 public class AlumnoServiceImpl implements AlumnoService {
     private final AlumnoDao alumnoDao;
-
     @Autowired
     public AlumnoServiceImpl(AlumnoDao alumnoDao) {
         this.alumnoDao = alumnoDao;

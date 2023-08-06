@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 public interface AlumnoService {
     void aprobarAsignatura(int materiaId, int nota, long dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException;
-
     Alumno crearAlumno(AlumnoDto alumno);
-
     Alumno buscarAlumno(String apellidoAlumno);
     Alumno modificarAlumno(long idAlumno, Alumno alumno);
     Alumno deleteAlumno(Long dni);

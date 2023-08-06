@@ -20,7 +20,7 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
     }
 
     @Override
-    public Carrera obtenerCarreraPorCodigo(String codigo) {
+    public Carrera obtenerCarreraPorCodigo(int codigo) {
         return carreras.get(codigo);
     }
 
@@ -30,7 +30,7 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
     }
 
     @Override
-    public void deleteCarrera(String codigo) {
+    public void deleteCarrera(int codigo) {
         carreras.remove(codigo);
     }
 }

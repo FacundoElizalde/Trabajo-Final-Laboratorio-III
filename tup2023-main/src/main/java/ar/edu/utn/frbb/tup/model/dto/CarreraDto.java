@@ -3,7 +3,7 @@ package ar.edu.utn.frbb.tup.model.dto;
 public class CarreraDto {
 
     private String nombre;
-    private String codigo;
+    private int codigo;
     private int departamento;
     private int cantidadCuatrimestres;
 
@@ -15,11 +15,11 @@ public class CarreraDto {
         this.nombre = nombre;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

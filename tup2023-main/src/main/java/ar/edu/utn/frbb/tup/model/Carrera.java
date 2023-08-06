@@ -3,13 +3,13 @@ import java.util.List;
 
 public class Carrera {
     private String nombre;
-    private String codigo;
+    private int codigo;
     private int departamento;
     private int cantidadCuatrimestres;
     private List<Materia> materias;
 
     // Constructor
-    public Carrera(String nombre, String codigo, int departamento, int cantidadCuatrimestres) {
+    public Carrera(String nombre, int codigo, int departamento, int cantidadCuatrimestres) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.departamento = departamento;
@@ -24,11 +24,11 @@ public class Carrera {
         this.nombre = nombre;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

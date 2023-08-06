@@ -29,7 +29,7 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public Carrera obtenerCarreraPorCodigo(String codigo) {
+    public Carrera obtenerCarreraPorCodigo(int codigo) {
         return carreraDao.obtenerCarreraPorCodigo(codigo);
     }
 
@@ -39,7 +39,7 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public void deleteCarrera(String codigo) {
+    public void deleteCarrera(int codigo) {
         carreraDao.deleteCarrera(codigo);
     }
 }

@@ -20,14 +20,14 @@ public class CarreraController {
         this.carreraService = carreraService;
     }
 
-    @PostMapping
-    public ResponseEntity<Carrera> guardarCarrera(@RequestBody CarreraDto carreraDto) {
-        Carrera carreraGuardada = carreraService.guardarCarrera(carreraDto);
-        return new ResponseEntity<>(carreraGuardada, HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<Carrera>> obtenerTodasLasCarreras() {
+        List<Carrera> carreras = carreraService.obtenerTodasLasCarreras();
+        return new ResponseEntity<>(carreras, HttpStatus.OK);
     }
 
-    @GetMapping("carrera/{idCarrera}")
-    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@PathVariable String codigo) {
+    @GetMapping("/{idCarrera}")
+    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@PathVariable int codigo) {
         Carrera carrera = carreraService.obtenerCarreraPorCodigo(codigo);
         if (carrera != null) {
             return new ResponseEntity<>(carrera, HttpStatus.OK);
@@ -36,14 +36,14 @@ public class CarreraController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Carrera>> obtenerTodasLasCarreras() {
-        List<Carrera> carreras = carreraService.obtenerTodasLasCarreras();
-        return new ResponseEntity<>(carreras, HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<Carrera> guardarCarrera(@RequestBody CarreraDto carreraDto) {
+        Carrera carreraGuardada = carreraService.guardarCarrera(carreraDto);
+        return new ResponseEntity<>(carreraGuardada, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("carrera/{idCarrera}")
-    public ResponseEntity<Void> deleteCarrera(@PathVariable String codigo) {
+    @DeleteMapping("/{idCarrera}")
+    public ResponseEntity<Void> deleteCarrera(@PathVariable int codigo) {
         carreraService.deleteCarrera(codigo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
