@@ -13,6 +13,5 @@ public interface CarreraService {
 
     List<Carrera> obtenerTodasLasCarreras();
 
-    void deleteCarrera(int codigo);
+    Carrera deleteCarrera(int codigo);
 }
-
