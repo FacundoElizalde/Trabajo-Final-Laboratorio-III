@@ -17,8 +17,8 @@ public class CarreraDtoTest {
     @Test
     public void testSetCodigo() {
         CarreraDto carreraDto = new CarreraDto();
-        carreraDto.setCodigo("IS34");
-        Assertions.assertEquals("IS34", carreraDto.getCodigo());
+        carreraDto.setCodigo(2345);
+        Assertions.assertEquals(2345, carreraDto.getCodigo());
     }
 
     @Test

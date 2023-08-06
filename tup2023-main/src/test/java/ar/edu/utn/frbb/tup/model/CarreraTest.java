@@ -9,12 +9,12 @@ public class CarreraTest {
     public void testCarreraConstructor() {
 
         String nombre = "Ingeniería Informática";
-        String codigo = "4567";
+        int codigo = 4567;
         int departamento = 1;
         int cantidadCuatrimestres = 10;
 
         String nombre2 = "Tecnicatura en Programacion";
-        String codigo2 = "2345";
+        int codigo2 = 2345;
         int departamento2 = 1;
         int cantidadCuatrimestres2 = 4;
 
