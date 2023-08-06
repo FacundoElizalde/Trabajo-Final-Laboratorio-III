@@ -7,9 +7,38 @@ import java.util.Objects;
 public class Materia {
     private int materiaId;
     private String nombre;
+    private int anio;
+    private int cuatrimestre;
+    private List<Materia> correlatividades;
+    private Carrera carrera;
 
-    public void setNombre(String nombre) {
+    public Materia() {
+    }
+
+    public Materia(String nombre, int anio, int cuatrimestre) {
+        this.anio = anio;
+        this.cuatrimestre = cuatrimestre;
         this.nombre = nombre;
+    }
+
+    public void agregarCorrelatividad(Materia m) {
+        this.correlatividades.add(m);
+    }
+
+    public List<Materia> getCorrelatividades() {
+        return this.correlatividades;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getMateriaId() {
+        return materiaId;
+    }
+
+    public void setMateriaId(int materiaId) {
+        this.materiaId = materiaId;
     }
 
     public int getAnio() {
@@ -28,43 +57,12 @@ public class Materia {
         this.cuatrimestre = cuatrimestre;
     }
 
-    public void setCorrelatividades(List<Materia> correlatividades) {
-        this.correlatividades = correlatividades;
+    public Carrera getCarrera() {
+        return carrera;
     }
 
-    private int anio;
-    private int cuatrimestre;
-
-    private List<Materia> correlatividades;
-
-    public Materia(){}
-
-
-    public Materia(String nombre, int anio, int cuatrimestre) {
-        this.anio = anio;
-        this.cuatrimestre = cuatrimestre;
-        this.nombre = nombre;
-        correlatividades = new ArrayList<>();
-    }
-
-    public void agregarCorrelatividad(Materia m){
-        this.correlatividades.add(m);
-    }
-
-    public List<Materia> getCorrelatividades(){
-        return this.correlatividades;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getMateriaId() {
-        return materiaId;
-    }
-
-    public void setMateriaId(int materiaId) {
-        this.materiaId = materiaId;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
 
     @Override
@@ -73,11 +71,14 @@ public class Materia {
         if (o == null || getClass() != o.getClass()) return false;
         Materia materia = (Materia) o;
         return materiaId == materia.materiaId && anio == materia.anio && cuatrimestre == materia.cuatrimestre
-                && Objects.equals(nombre, materia.nombre) &&  Objects.equals(correlatividades, materia.correlatividades);
+                && Objects.equals(nombre, materia.nombre) && Objects.equals(correlatividades, materia.correlatividades);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(materiaId, nombre, anio, cuatrimestre, correlatividades);
+    }
+
+    public void setNombre(String nombre) {
     }
 }

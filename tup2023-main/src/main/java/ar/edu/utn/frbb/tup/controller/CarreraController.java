@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -22,8 +21,8 @@ public class CarreraController {
         this.carreraService = carreraService;
     }
 
-    @GetMapping("/{idCarrera}")
-    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@RequestParam int codigo) {
+    @GetMapping("/carrera/{codigo}")
+    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@PathVariable int codigo) {
         Carrera carrera = carreraService.obtenerCarreraPorCodigo(codigo);
         if (carrera != null) {
             return new ResponseEntity<>(carrera, HttpStatus.OK);
@@ -44,9 +43,13 @@ public class CarreraController {
         return new ResponseEntity<>(carreraGuardada, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{idCarrera}")
-    public ResponseEntity<Void> deleteCarrera(@RequestParam int codigo) throws CarreraNotFoundException {
-        carreraService.deleteCarrera(codigo);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<Void> deleteCarrera(@PathVariable int codigo) {
+        try {
+            carreraService.deleteCarrera(codigo);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (CarreraNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

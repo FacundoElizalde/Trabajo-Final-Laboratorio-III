@@ -2,10 +2,13 @@ package ar.edu.utn.frbb.tup.persistence;
 
 import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+@Service
 public class AlumnoDaoMemoryImpl implements AlumnoDao {
 
     private static final Map<Long, Alumno> repositorioAlumnos = new HashMap<>();

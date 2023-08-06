@@ -1,4 +1,6 @@
 package ar.edu.utn.frbb.tup.model;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Carrera {
@@ -14,6 +16,7 @@ public class Carrera {
         this.codigo = codigo;
         this.departamento = departamento;
         this.cantidadCuatrimestres = cantidadCuatrimestres;
+        this.materias = new ArrayList<>();
     }
 
     public String getNombre() {
