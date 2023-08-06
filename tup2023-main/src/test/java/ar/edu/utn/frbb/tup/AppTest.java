@@ -1,20 +1,17 @@
 package ar.edu.utn.frbb.tup;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+@SpringBootTest
+class AppTest {
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    void contextLoads() {
+
+        // No se hace nada en este test realmente,
+        // simplemente es una verificacion de que la
+        // aplicación se inicia correctamente
     }
 }
+
