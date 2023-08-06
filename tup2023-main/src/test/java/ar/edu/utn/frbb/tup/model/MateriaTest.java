@@ -8,15 +8,12 @@ public class MateriaTest {
 
     @Test
     public void testMateriaConstructor() {
-        // Arrange
         String nombre = "Matemáticas";
         int anio = 3;
         int cuatrimestre = 2;
 
-        // Act
         Materia materia = new Materia(nombre, anio, cuatrimestre);
 
-        // Assert
         Assertions.assertEquals(nombre, materia.getNombre());
         Assertions.assertEquals(anio, materia.getAnio());
         Assertions.assertEquals(cuatrimestre, materia.getCuatrimestre());
@@ -26,7 +23,6 @@ public class MateriaTest {
 
     @Test
     public void testAgregarCorrelatividad() {
-        // Arrange
         Materia materia1 = new Materia("Laboratorio en Computacion I", 1, 1);
         Materia materia2 = new Materia("Laboratorio en Computacion III", 2, 1);
 
@@ -39,12 +35,10 @@ public class MateriaTest {
 
     @Test
     public void testAgregarCorrelatividadMultiple() {
-        // Arrange
         Materia materia1 = new Materia("Laboratorio en Computacion I", 3, 2);
         Materia materia2 = new Materia("Laboratorio en Computacion II", 2, 1);
         Materia materia3 = new Materia("Laboratorio en Computacion III", 2, 1);
 
-        // Act
         materia1.agregarCorrelatividad(materia2);
         materia1.agregarCorrelatividad(materia3);
 

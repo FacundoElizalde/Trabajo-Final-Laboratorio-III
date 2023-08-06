@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class CarreraDaoMemoryImpl implements CarreraDao {
 
-    private static Map<String, Carrera> carreras = new HashMap<>();
+    private static final Map<String, Carrera> carreras = new HashMap<>();
 
     @Override
     public Carrera save(Carrera carrera) {
