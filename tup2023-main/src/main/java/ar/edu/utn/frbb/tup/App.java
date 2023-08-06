@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("ar.edu.utn.frbb.tup.controller")
+@ComponentScan("ar.edu.utn.frbb.tup")
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
