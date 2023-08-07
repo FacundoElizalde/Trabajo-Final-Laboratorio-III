@@ -126,19 +126,23 @@ class CarreraControllerTest {
         carreraDto.setDepartamento(789);
         carreraDto.setCantidadCuatrimestres(12);
 
-        when(carreraService.modificarCarrera(eq(codigo), any(CarreraDto.class))).thenReturn(null);
+        Carrera carreraModificada = new Carrera("Licenciatura en Computacion", 25043, 1, 6);
+        when(carreraService.modificarCarrera(eq(codigo), any(CarreraDto.class))).thenReturn(carreraModificada);
 
         ResponseEntity<Carrera> responseEntity = carreraController.modificarCarrera(codigo, carreraDto);
 
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(carreraModificada, responseEntity.getBody());
 
         verify(carreraService, times(1)).modificarCarrera(eq(codigo), any(CarreraDto.class));
     }
 
+
     @Test
     void testDeleteCarreraExistente() throws CarreraNotFoundException {
         int codigo = 1;
-        doNothing().when(carreraService).deleteCarrera(eq(codigo));
+        Carrera carreraEliminada = new Carrera("Tecnicatura en Programación", 2508, 1, 3);
+        when(carreraService.deleteCarrera(eq(codigo))).thenReturn(carreraEliminada);
 
         ResponseEntity<Carrera> responseEntity = carreraController.deleteCarrera(codigo);
 
@@ -146,6 +150,8 @@ class CarreraControllerTest {
 
         verify(carreraService, times(1)).deleteCarrera(eq(codigo));
     }
+
+
 
     @Test
     void testDeleteCarreraNoExistente() throws CarreraNotFoundException {
