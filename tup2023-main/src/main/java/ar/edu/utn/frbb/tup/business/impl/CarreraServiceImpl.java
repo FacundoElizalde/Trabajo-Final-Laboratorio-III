@@ -31,24 +31,19 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public Carrera obtenerCarreraPorCodigo(int codigo) {
-        return carreraDao.obtenerCarreraPorCodigo(codigo);
-    }
-
-    @Override
     public List<Carrera> obtenerTodasLasCarreras() {
         return carreraDao.obtenerTodasLasCarreras();
     }
 
     @Override
-    public Carrera deleteCarrera(int codigo) throws CarreraNotFoundException {
+    public Carrera obtenerCarreraPorCodigo(int codigo) throws CarreraNotFoundException {
         Carrera carrera = carreraDao.obtenerCarreraPorCodigo(codigo);
         if (carrera == null) {
-            throw new CarreraNotFoundException("Carrera no encontrada con código: " + codigo);
+            throw new CarreraNotFoundException("No se encontró una carrera con el código " + codigo);
         }
-        carreraDao.deleteCarrera(codigo);
         return carrera;
     }
+
 
     @Override
     public Carrera modificarCarrera(int codigo, CarreraDto carreraDto) throws CarreraNotFoundException {
@@ -62,5 +57,15 @@ public class CarreraServiceImpl implements CarreraService {
         carreraExistente.setCantidadCuatrimestres(carreraDto.getCantidadCuatrimestres());
 
         return carreraDao.save(carreraExistente);
+    }
+
+    @Override
+    public Carrera deleteCarrera(int codigo) throws CarreraNotFoundException {
+        Carrera carrera = carreraDao.obtenerCarreraPorCodigo(codigo);
+        if (carrera == null) {
+            throw new CarreraNotFoundException("Carrera no encontrada con código: " + codigo);
+        }
+        carreraDao.deleteCarrera(codigo);
+        return carrera;
     }
 }

@@ -11,7 +11,7 @@ public interface CarreraService {
 
     Carrera guardarCarrera(CarreraDto carreraDto);
 
-    Carrera obtenerCarreraPorCodigo(int codigo);
+    Carrera obtenerCarreraPorCodigo(int codigo) throws CarreraNotFoundException;
 
     List<Carrera> obtenerTodasLasCarreras();
 

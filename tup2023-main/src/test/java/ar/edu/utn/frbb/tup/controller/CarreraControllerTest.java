@@ -33,7 +33,7 @@ class CarreraControllerTest {
     }
 
     @Test
-    void testObtenerCarreraPorCodigoExistente() {
+    void testObtenerCarreraPorCodigoExistente() throws CarreraNotFoundException {
         int codigo = 1;
         Carrera carrera = new Carrera("Carrera Test", codigo, 123, 8);
 
@@ -48,7 +48,7 @@ class CarreraControllerTest {
     }
 
     @Test
-    void testObtenerCarreraPorCodigoNoExistente() {
+    void testObtenerCarreraPorCodigoNoExistente() throws CarreraNotFoundException {
         int codigo = 1;
 
         when(carreraService.obtenerCarreraPorCodigo(eq(codigo))).thenReturn(null);

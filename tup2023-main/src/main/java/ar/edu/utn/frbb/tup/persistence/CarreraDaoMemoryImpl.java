@@ -13,11 +13,18 @@ public class CarreraDaoMemoryImpl implements CarreraDao {
 
     private static final Map<String, Carrera> carrerasPorNombre = new HashMap<>();
     private static final Map<Integer, Carrera> carrerasPorCodigo = new HashMap<>();
-
+    private int codigo = 1;
 
     @Override
     public Carrera save(Carrera carrera) {
-        carrerasPorNombre.put(carrera.getNombre(), carrera);
+        if (carrera != null) {
+            if (carrera.getCodigo() == 0) {
+                carrera.setCodigo(codigo++);
+            }
+
+            carrerasPorCodigo.put(carrera.getCodigo(), carrera);
+            carrerasPorNombre.put(carrera.getNombre(), carrera);
+        }
         return carrera;
     }
 

@@ -22,7 +22,7 @@ public class CarreraController {
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@PathVariable int codigo) {
+    public ResponseEntity<Carrera> obtenerCarreraPorCodigo(@PathVariable int codigo) throws CarreraNotFoundException {
         Carrera carrera = carreraService.obtenerCarreraPorCodigo(codigo);
         if (carrera != null) {
             return new ResponseEntity<>(carrera, HttpStatus.OK);

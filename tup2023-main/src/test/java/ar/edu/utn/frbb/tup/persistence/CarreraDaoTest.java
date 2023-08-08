@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 public class CarreraDaoTest {
 
     private CarreraDao carreraDao;
@@ -15,14 +17,17 @@ public class CarreraDaoTest {
     public void setUp() {
         carreraDao = new CarreraDaoMemoryImpl();
     }
-
     @Test
     public void testSaveAndObtenerCarreraPorCodigo() {
         Carrera carrera = new Carrera("Ingeniería en Sistemas", 1, 4, 8);
-        carreraDao.save(carrera);
 
+        when(carreraDao.save(carrera)).thenReturn(carrera);
+
+        Carrera carreraGuardada = carreraDao.save(carrera);
+        verify(carreraDao).save(carrera);
         Carrera carreraObtenida = carreraDao.obtenerCarreraPorCodigo(carrera.getCodigo());
 
+        verify(carreraDao).obtenerCarreraPorCodigo(carrera.getCodigo());
         Assertions.assertNotNull(carreraObtenida);
         Assertions.assertEquals(carrera.getNombre(), carreraObtenida.getNombre());
         Assertions.assertEquals(carrera.getCodigo(), carreraObtenida.getCodigo());

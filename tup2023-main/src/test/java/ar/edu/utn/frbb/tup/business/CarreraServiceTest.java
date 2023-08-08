@@ -47,7 +47,7 @@ public class CarreraServiceTest {
     }
 
     @Test
-    public void testObtenerCarreraPorCodigo() {
+    public void testObtenerCarreraPorCodigo() throws CarreraNotFoundException {
         int codigo = 1;
         Carrera carrera = new Carrera("Ingeniería en Sistemas", codigo, 1, 10);
         when(carreraDao.obtenerCarreraPorCodigo(codigo)).thenReturn(carrera);
