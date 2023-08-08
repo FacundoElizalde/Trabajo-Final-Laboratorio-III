@@ -58,8 +58,8 @@ public class MateriaController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<List<Materia>> obtenerMateriasPorNombre(@RequestParam(required = false) String nombre) {
+    @GetMapping ("/{nombre}")
+    public ResponseEntity<List<Materia>> getMateriaPorNombre(@RequestParam(required = false) String nombre) {
         if (nombre != null && !nombre.isEmpty()) {
             List<Materia> materiasPorNombre = materiaService.getMateriasPorNombre(nombre);
             return new ResponseEntity<>(materiasPorNombre, HttpStatus.OK);

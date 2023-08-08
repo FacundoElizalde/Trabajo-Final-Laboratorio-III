@@ -33,7 +33,8 @@ public class AlumnoServiceImpl implements AlumnoService {
         a.setApellido(alumno.getApellido());
         a.setDni(alumno.getDni());
         Random random = new Random();
-        a.setId(random.nextLong());
+        long id = Math.abs(random.nextLong());
+        a.setId(id);
         alumnoDao.saveAlumno(a);
         return a;
     }
