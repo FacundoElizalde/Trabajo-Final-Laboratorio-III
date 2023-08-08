@@ -25,6 +25,9 @@ public class MateriaController {
     @PostMapping
     public ResponseEntity<Materia> crearMateria(@RequestBody MateriaDto materiaDto) {
         Materia materia = convertirDtoAMateria(materiaDto);
+        if (materiaDto.getAnio() <= 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         try {
             Materia nuevaMateria = materiaService.crearMateria(materiaDto);
             return new ResponseEntity<>(nuevaMateria, HttpStatus.CREATED);
@@ -45,14 +48,15 @@ public class MateriaController {
     }
 
     @DeleteMapping("/{idMateria}")
-    public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) throws MateriaNotFoundException {
-        Materia materiaEliminada = materiaService.deleteMateria(idMateria);
-        if (materiaEliminada != null) {
-            return new ResponseEntity<>(materiaEliminada, HttpStatus.OK);
-        } else {
+    public ResponseEntity<Materia> deleteMateria(@PathVariable int idMateria) {
+        try {
+            Materia materiaEliminada = materiaService.deleteMateria(idMateria);
+            return new ResponseEntity<>(materiaEliminada, HttpStatus.NO_CONTENT);
+        } catch (MateriaNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
     @GetMapping
     public ResponseEntity<List<Materia>> obtenerMateriasPorNombre(@RequestParam(required = false) String nombre) {

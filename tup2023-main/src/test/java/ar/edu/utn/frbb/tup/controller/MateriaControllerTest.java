@@ -13,8 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MateriaControllerTest {
@@ -28,13 +30,13 @@ public class MateriaControllerTest {
     @Test
     public void testCrearMateria() {
         MateriaDto materiaDto = new MateriaDto();
-        materiaDto.setNombre("Matemáticas");
-        materiaDto.setAnio(1);
+        materiaDto.setNombre("Laboratorio en Computacion III");
+        materiaDto.setAnio(2);
         materiaDto.setCuatrimestre(1);
 
         Materia nuevaMateria = new Materia();
-        nuevaMateria.setNombre("Matemáticas");
-        nuevaMateria.setAnio(1);
+        nuevaMateria.setNombre("Laboratorio en Computacion III");
+        nuevaMateria.setAnio(2);
         nuevaMateria.setCuatrimestre(1);
 
         when(materiaService.crearMateria(any(MateriaDto.class))).thenReturn(nuevaMateria);
@@ -46,7 +48,7 @@ public class MateriaControllerTest {
     @Test
     public void testCrearMateria_InvalidInput() {
         MateriaDto materiaDto = new MateriaDto();
-        materiaDto.setNombre("Matemáticas");
+        materiaDto.setNombre("Laboratorio en Computacion III");
         materiaDto.setAnio(0);
         materiaDto.setCuatrimestre(1);
 
@@ -68,11 +70,13 @@ public class MateriaControllerTest {
         materiaModificada.setAnio(2);
         materiaModificada.setCuatrimestre(1);
 
-        when(materiaService.modificarMateria(idMateria, any(Materia.class))).thenReturn(materiaModificada);
+        when(materiaService.modificarMateria(eq(idMateria), any(Materia.class))).thenReturn(materiaModificada);
+
         ResponseEntity<Materia> response = materiaController.modificarMateria(idMateria, materiaDto);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(materiaModificada);
     }
+
 
     @Test
     public void testModificarMateria_MateriaNotFoundException() throws MateriaNotFoundException {
@@ -82,10 +86,13 @@ public class MateriaControllerTest {
         materiaDto.setAnio(2);
         materiaDto.setCuatrimestre(1);
 
-        when(materiaService.modificarMateria(idMateria, any(Materia.class))).thenThrow(MateriaNotFoundException.class);
+        when(materiaService.modificarMateria(eq(idMateria), any(Materia.class)))
+                .thenThrow(new MateriaNotFoundException("Materia no encontrada con ID: " + idMateria));
+
         ResponseEntity<Materia> response = materiaController.modificarMateria(idMateria, materiaDto);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
+
 
     @Test
     public void testDeleteMateria() throws MateriaNotFoundException {
@@ -97,18 +104,21 @@ public class MateriaControllerTest {
         materiaEliminada.setAnio(2);
         materiaEliminada.setCuatrimestre(1);
 
-        when(materiaService.deleteMateria(anyInt())).thenThrow(MateriaNotFoundException.class);
+        when(materiaService.deleteMateria(eq(idMateria))).thenReturn(materiaEliminada);
+
         ResponseEntity<Materia> response = materiaController.deleteMateria(idMateria);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
+
+
 
     @Test
     public void testDeleteMateria_MateriaNotFoundException() throws MateriaNotFoundException {
         int idMateria = 1;
 
-        when(materiaService.deleteMateria(anyInt())).thenThrow(MateriaNotFoundException.class);
+        when(materiaService.deleteMateria(eq(idMateria))).thenThrow(MateriaNotFoundException.class);
         ResponseEntity<Materia> response = materiaController.deleteMateria(idMateria);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     private int anyInt() {
